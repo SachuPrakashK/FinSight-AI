@@ -1,0 +1,186 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                       String                   @id @default(cuid())
+  name                     String
+  email                    String                   @unique
+  passwordHash             String?
+  emailVerifiedAt          DateTime?
+  avatarUrl                String?
+  preferredLanguage        String                   @default("en")
+  preferredCurrency        String                   @default("INR")
+  twoFactorEnabled         Boolean                  @default(false)
+  twoFactorSecretEncrypted String?
+  createdAt                DateTime                 @default(now())
+  updatedAt                DateTime                 @updatedAt
+  deletedAt                DateTime?
+  sessions                 Session[]
+  oauthAccounts            OAuthAccount[]
+  preference                UserPreference?
+  accounts                 Account[]
+  categories               Category[]
+  transactions             Transaction[]
+  auditLogs                AuditLog[]
+  verificationTokens       EmailVerificationToken[]
+  passwordResetTokens      PasswordResetToken[]
+  recoveryCodes            TwoFactorRecoveryCode[]
+  mfaChallenges            MfaLoginChallenge[]
+}
+
+model Session {
+  id         String    @id @default(cuid())
+  userId     String
+  tokenHash  String    @unique
+  csrfHash   String
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  lastUsedAt DateTime?
+  createdAt  DateTime  @default(now())
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, expiresAt])
+}
+
+model OAuthAccount {
+  id                String   @id @default(cuid())
+  userId            String
+  provider          String
+  providerAccountId String
+  createdAt         DateTime @default(now())
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model UserPreference {
+  id                      String @id @default(cuid())
+  userId                  String @unique
+  language                String @default("en")
+  currency                String @default("INR")
+  dateFormat              String @default("dd/MM/yyyy")
+  timezone                String @default("Asia/Kolkata")
+  notificationPreferences Json   @default("{}")
+  user                    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Language {
+  id         String  @id @default(cuid())
+  code       String  @unique
+  name       String
+  nativeName String
+  isEnabled  Boolean @default(true)
+  isDefault  Boolean @default(false)
+}
+
+model Account {
+  id             String        @id @default(cuid())
+  userId         String
+  name           String
+  accountType    String
+  currency       String        @default("INR")
+  openingBalance Decimal       @default(0) @db.Decimal(19, 4)
+  currentBalance Decimal       @default(0) @db.Decimal(19, 4)
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions   Transaction[]
+  @@index([userId, isActive])
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  userId       String
+  name         String
+  type         String
+  icon         String?
+  color        String?
+  isDefault    Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  @@unique([userId, name, type])
+  @@index([userId, type])
+}
+
+model Transaction {
+  id              String    @id @default(cuid())
+  userId          String
+  accountId       String
+  categoryId      String?
+  type            String
+  amount          Decimal   @db.Decimal(19, 4)
+  currency        String    @default("INR")
+  description     String
+  transactionDate DateTime
+  notes           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account         Account   @relation(fields: [accountId], references: [id], onDelete: Restrict)
+  category        Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  @@index([userId, transactionDate])
+  @@index([accountId, transactionDate])
+  @@index([categoryId])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json     @default("{}")
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, createdAt])
+}
+
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, expiresAt])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, expiresAt])
+}
+
+model TwoFactorRecoveryCode {
+  id        String   @id @default(cuid())
+  userId    String
+  codeHash  String
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, usedAt])
+}
+
+model MfaLoginChallenge {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, expiresAt])
+}

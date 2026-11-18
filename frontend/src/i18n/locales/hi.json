@@ -1,0 +1,50 @@
+{
+  "app": {
+    "workspace": "कार्यक्षेत्र",
+    "primaryNavigation": "मुख्य नेविगेशन",
+    "demoWorkspace": "व्यक्तिगत कार्यक्षेत्र",
+    "setupStage": "आधार चरण"
+  },
+  "nav": {
+    "overview": "अवलोकन",
+    "transactions": "लेन-देन",
+    "accounts": "खाते",
+    "budgets": "बजट",
+    "goals": "बचत लक्ष्य"
+  },
+  "common": {
+    "closeMenu": "नेविगेशन मेनू बंद करें",
+    "openMenu": "नेविगेशन मेनू खोलें",
+    "notifications": "सूचनाएँ",
+    "language": "भाषा"
+  },
+  "dashboard": {
+    "eyebrow": "आपके वित्त, एक नज़र में",
+    "title": "सुप्रभात",
+    "subtitle": "आपकी वित्तीय स्थिति का स्पष्ट दृश्य यहाँ से शुरू होता है।",
+    "period": "इस महीने",
+    "summary": "वित्तीय सारांश",
+    "totalBalance": "कुल शेष",
+    "availableAcrossAccounts": "आपके खातों में",
+    "income": "आय",
+    "spending": "खर्च",
+    "selectedPeriod": "चुनी गई अवधि के लिए",
+    "savingsRate": "बचत दर",
+    "netOfIncomeAndSpending": "आय और खर्च के आधार पर",
+    "foundationTitle": "आपका वित्त कार्यक्षेत्र तैयार है",
+    "foundationBody": "ऐप का आधार तैयार है। आने वाले चरणों में खाते और लेन-देन जुड़ने पर आपका सारांश और जानकारी यहाँ दिखाई देगी।",
+    "cashFlow": "नकदी प्रवाह",
+    "cashFlowDescription": "समय के साथ आय और खर्च",
+    "recentActivity": "हाल की गतिविधि",
+    "latestTransactions": "आपके नवीनतम लेन-देन",
+    "noFinancialData": "अभी वित्तीय डेटा नहीं है",
+    "dataWillAppear": "रिकॉर्ड उपलब्ध होने पर सारांश अपडेट होगा।",
+    "noActivity": "अभी दिखाने के लिए कुछ नहीं",
+    "activityWillAppear": "लेन-देन जुड़ने पर यहाँ दिखाई देंगे।"
+  },
+  "foundation": {
+    "moduleSubtitle": "यह FinSight कार्यक्षेत्र का हिस्सा है।",
+    "title": "यह मॉड्यूल अगले चरण में आएगा",
+    "body": "प्रोजेक्ट चरणों में बनाया जा रहा है। डेटा मॉडल और प्रक्रियाएँ लागू होने पर यह अनुभाग उपलब्ध होगा।"
+  }
+}
