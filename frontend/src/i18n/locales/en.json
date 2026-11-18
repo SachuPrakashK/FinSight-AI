@@ -1,0 +1,50 @@
+{
+  "app": {
+    "workspace": "Workspace",
+    "primaryNavigation": "Primary navigation",
+    "demoWorkspace": "Personal workspace",
+    "setupStage": "Foundation milestone"
+  },
+  "nav": {
+    "overview": "Overview",
+    "transactions": "Transactions",
+    "accounts": "Accounts",
+    "budgets": "Budgets",
+    "goals": "Savings goals"
+  },
+  "common": {
+    "closeMenu": "Close navigation menu",
+    "openMenu": "Open navigation menu",
+    "notifications": "Notifications",
+    "language": "Language"
+  },
+  "dashboard": {
+    "eyebrow": "YOUR FINANCES, IN FOCUS",
+    "title": "Good morning",
+    "subtitle": "A clear view of your financial life starts here.",
+    "period": "This month",
+    "summary": "Financial summary",
+    "totalBalance": "Total balance",
+    "availableAcrossAccounts": "Across your accounts",
+    "income": "Income",
+    "spending": "Spending",
+    "selectedPeriod": "For the selected period",
+    "savingsRate": "Savings rate",
+    "netOfIncomeAndSpending": "Based on income and spending",
+    "foundationTitle": "Your finance workspace is ready",
+    "foundationBody": "The app foundation is in place. Once financial accounts and transactions are connected in upcoming milestones, your overview and insights will appear here.",
+    "cashFlow": "Cash flow",
+    "cashFlowDescription": "Income and spending over time",
+    "recentActivity": "Recent activity",
+    "latestTransactions": "Your latest transactions",
+    "noFinancialData": "No financial data yet",
+    "dataWillAppear": "Your summary will update when records are available.",
+    "noActivity": "Nothing to show yet",
+    "activityWillAppear": "Transactions will appear here as they are added."
+  },
+  "foundation": {
+    "moduleSubtitle": "This area is part of the FinSight workspace.",
+    "title": "This module is coming in a later milestone",
+    "body": "The project is being built in focused steps. This section will become available when its data model and workflows are implemented."
+  }
+}
